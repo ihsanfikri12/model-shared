@@ -183,7 +183,6 @@ final class ModelSharedServiceProvider extends PackageServiceProvider
         if ($registrar->runningModelMigration()) {
             $this->loadMigrationsFrom([
                 __DIR__.'/../database/migrations/005_create_donors_table.php',
-                __DIR__.'/../database/migrations/add_email_to_donors_table.php',
             ]);
         }
     }

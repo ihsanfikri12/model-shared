@@ -16,6 +16,7 @@ return new class extends Migration
             $table->uuid('employee_id');
             $table->string('identification_number');
             $table->string('name');
+            $table->string('email')->nullable();
             $table->timestamps();
         });
 
