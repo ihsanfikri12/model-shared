@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('identification_number');
             $table->string('name');
             $table->string('email')->nullable();
+            $table->unsignedBigInteger('donor_phone_id')->nullable();
             $table->timestamps();
         });
 
@@ -32,10 +33,19 @@ return new class extends Migration
             $table->timestamp('deleted_at')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('donors', function (Blueprint $table): void {
+            $table->foreign('donor_phone_id')->references('id')->on('donor_phones')->nullOnDelete();
+        });
     }
 
     public function down(): void
     {
+        Schema::table('donors', function (Blueprint $table): void {
+            $table->dropForeign(['donor_phone_id']);
+        });
+
+        Schema::dropIfExists('donor_phones');
         Schema::dropIfExists('donors');
     }
 };
